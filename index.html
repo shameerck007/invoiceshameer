@@ -2,7 +2,11 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#0b1524">
 <title>Professional Quotation — Abdullah Hussain Hazazy</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -212,6 +216,10 @@ body {
 
 /* hide main app until logged in */
 #app { display: none; }
+
+/* responsive button labels */
+.btn-short { display: none; }
+.btn-full  { display: inline; }
 
 
 .toolbar {
@@ -839,15 +847,181 @@ tbody tr:hover .del-btn { opacity: 1; }
   .ci, .meta-value, .ef, .notes-area { background: transparent !important; }
 }
 
-@media (max-width: 780px) {
-  .header-inner { grid-template-columns: 1fr; gap: 20px; }
-  .co-right { direction: ltr; text-align: left; }
-  .title-center { order: -1; }
-  .meta-bar { grid-template-columns: repeat(2,1fr); }
+/* ──────────── TABLET (≤ 900px) ──────────── */
+@media (max-width: 900px) {
+  .header-inner { padding: 32px 28px 28px; gap: 18px; }
+  .table-section { padding: 20px 16px 14px; }
+  .summary-section { padding: 20px 20px 24px; gap: 20px; }
+  .client-box { padding: 20px 22px; }
+}
+
+/* ──────────── MOBILE (≤ 640px) ──────────── */
+@media (max-width: 640px) {
+
+  /* Prevent iOS auto-zoom on input focus — must be 16px+ */
+  input, textarea, select {
+    font-size: 16px !important;
+  }
+
+  /* Responsive button labels */
+  .btn-short { display: inline; }
+  .btn-full  { display: none; }
+
+  body {
+    padding: 0 0 80px;
+    background-attachment: fixed;
+  }
+
+  /* ── Login ── */
+  #login-screen { align-items: flex-end; padding-bottom: 0; }
+  .login-card {
+    border-radius: 24px 24px 0 0;
+    padding: 36px 24px 40px;
+    max-width: 100%;
+    border-bottom: none;
+    animation: loginSlideUp 0.5s cubic-bezier(0.22,1,0.36,1) both;
+  }
+  @keyframes loginSlideUp {
+    from { opacity: 0; transform: translateY(60px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .login-logo { margin-bottom: 28px; }
+  .login-company { font-size: 19px; }
+  .login-input { padding: 15px 16px; font-size: 16px !important; }
+  .login-btn { padding: 16px; font-size: 15px; min-height: 52px; }
+
+  /* ── App wrapper ── */
+  #app .page-wrapper { padding: 0; }
+
+  /* ── Toolbar ── */
+  .toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(242,237,230,0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    margin-bottom: 0;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    justify-content: stretch;
+    gap: 8px;
+    flex-wrap: nowrap;
+  }
+  .btn {
+    flex: 1;
+    padding: 10px 8px;
+    font-size: 11.5px;
+    letter-spacing: 0;
+    min-height: 42px;
+    border-radius: 8px;
+    white-space: nowrap;
+  }
+
+  /* ── Card ── */
+  .card { border-radius: 0; box-shadow: none; border: none; border-top: 1px solid var(--border); }
+
+  /* ── Header ── */
+  .header-inner {
+    grid-template-columns: 1fr;
+    padding: 24px 20px 20px;
+    gap: 0;
+    text-align: center;
+  }
+  .title-center { order: 0; margin-bottom: 20px; }
+  .doc-title-main { font-size: 32px; }
+  .doc-title-ar { font-size: 16px; }
+  .co-left { order: 1; align-items: center; text-align: center; gap: 6px; }
+  .co-right {
+    order: 2;
+    align-items: center;
+    text-align: center;
+    direction: ltr;
+    gap: 6px;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(200,151,74,0.15);
+  }
+  .co-name-en { font-size: 20px; }
+  .co-name-ar { font-size: 16px; }
+  .co-detail, .co-detail-ar { font-size: 12px; margin-top: 2px; }
+  .diamond-deco { margin-bottom: 10px; }
+
+  /* ── Meta bar ── */
+  .meta-bar { grid-template-columns: 1fr 1fr; }
+  .meta-item { padding: 14px 16px; }
+  .meta-item:nth-child(2) { border-right: none; }
+  .meta-item:nth-child(3) { border-top: 1px solid var(--border); }
+  .meta-item:nth-child(4) { border-right: none; border-top: 1px solid var(--border); }
+  .meta-value { font-size: 14px !important; }
+
+  /* ── Client section ── */
   .client-section { grid-template-columns: 1fr; }
-  .client-box { border-right: none; border-bottom: 1px solid var(--border); }
-  .summary-section { grid-template-columns: 1fr; }
-  .doc-footer { grid-template-columns: 1fr; text-align: center; }
+  .client-box { border-right: none; border-bottom: 1px solid var(--border); padding: 18px 16px; }
+  .client-box:last-child { border-bottom: none; }
+  .ef { font-size: 16px !important; padding: 8px 0; }
+  .ef-lg { font-size: 16px !important; }
+
+  /* ── Table ── */
+  .table-section { padding: 16px 12px 12px; }
+  .table-scroll {
+    border-radius: 8px;
+    -webkit-overflow-scrolling: touch;
+  }
+  /* Show a scroll hint shadow on right edge */
+  .table-scroll::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 24px; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(200,151,74,0.08));
+    pointer-events: none;
+    border-radius: 0 8px 8px 0;
+  }
+  .table-scroll { position: relative; }
+
+  thead th { padding: 10px 8px; font-size: 9px; }
+  tbody td { padding: 8px 8px; }
+  .ci { font-size: 16px !important; min-width: 60px; }
+  .sno { width: 28px; font-size: 11px; }
+
+  /* Always show delete button on mobile (no hover) */
+  .del-btn {
+    opacity: 1 !important;
+    font-size: 16px;
+    padding: 6px 8px;
+    min-width: 36px;
+    min-height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ── Add Row ── */
+  .add-row-btn {
+    margin-top: 10px;
+    padding: 14px;
+    font-size: 14px;
+    min-height: 48px;
+  }
+
+  /* ── Summary ── */
+  .summary-section {
+    grid-template-columns: 1fr;
+    padding: 16px 16px 20px;
+    gap: 16px;
+  }
+  .notes-area { font-size: 16px !important; min-height: 80px; }
+  .t-row { padding: 13px 16px; font-size: 14px; }
+  .t-row.grand .t-value { font-size: 22px; }
+
+  /* ── Footer ── */
+  .doc-footer {
+    grid-template-columns: 1fr;
+    padding: 16px;
+    justify-items: center;
+  }
+  .footer-terms { max-width: 100%; text-align: center; font-size: 11px; }
   .sig-block { display: none; }
 }
 </style>
@@ -891,10 +1065,10 @@ tbody tr:hover .del-btn { opacity: 1; }
 
   <!-- Toolbar -->
   <div class="toolbar">
-    <button class="btn btn-ghost" onclick="addRow()">＋ Add Item</button>
-    <button class="btn btn-ghost" onclick="window.print()">🖨 Print</button>
-    <button class="btn btn-ghost" onclick="downloadPDF()">⬇ Download PDF</button>
-    <button class="btn btn-gold" onclick="alert('Quotation saved!')">💾 Save Quotation</button>
+    <button class="btn btn-ghost" onclick="addRow()"><span class="btn-full">＋ Add Item</span><span class="btn-short">＋ Add</span></button>
+    <button class="btn btn-ghost" onclick="window.print()"><span class="btn-full">🖨 Print</span><span class="btn-short">🖨</span></button>
+    <button class="btn btn-ghost" onclick="downloadPDF()"><span class="btn-full">⬇ Download PDF</span><span class="btn-short">⬇ PDF</span></button>
+    <button class="btn btn-gold" onclick="alert('Quotation saved!')"><span class="btn-full">💾 Save Quotation</span><span class="btn-short">💾 Save</span></button>
   </div>
 
   <div class="card">
