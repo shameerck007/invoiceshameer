@@ -44,7 +44,176 @@ body {
   margin: 0 auto;
 }
 
-/* ──────────── TOOLBAR ──────────── */
+/* ──────────── LOGIN SCREEN ──────────── */
+#login-screen {
+  position: fixed;
+  inset: 0;
+  background: var(--navy);
+  background-image:
+    radial-gradient(ellipse 70% 60% at 50% 0%, rgba(200,151,74,0.08), transparent),
+    url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c8974a' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+#login-screen.hide {
+  opacity: 0;
+  transform: scale(1.04);
+  pointer-events: none;
+}
+
+.login-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(200,151,74,0.25);
+  border-radius: 20px;
+  padding: 52px 48px 44px;
+  width: 100%;
+  max-width: 420px;
+  backdrop-filter: blur(12px);
+  box-shadow:
+    0 0 0 1px rgba(200,151,74,0.1),
+    0 32px 80px rgba(0,0,0,0.4),
+    inset 0 1px 0 rgba(255,255,255,0.06);
+  animation: loginRise 0.7s cubic-bezier(0.22,1,0.36,1) both;
+}
+
+@keyframes loginRise {
+  from { opacity: 0; transform: translateY(30px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.login-logo {
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.login-diamond-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.login-d-line { width: 50px; height: 1px; background: linear-gradient(90deg, transparent, rgba(200,151,74,0.6)); }
+.login-d-line-r { background: linear-gradient(90deg, rgba(200,151,74,0.6), transparent); }
+.login-d-icon { width: 8px; height: 8px; background: var(--gold); transform: rotate(45deg); box-shadow: 0 0 10px rgba(200,151,74,0.5); }
+
+.login-company {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--gold-light);
+  letter-spacing: 0.02em;
+  line-height: 1.25;
+}
+.login-company-ar {
+  font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+  font-size: 14px;
+  color: rgba(200,151,74,0.6);
+  direction: rtl;
+  margin-top: 4px;
+}
+.login-subtitle {
+  font-size: 12px;
+  color: rgba(255,255,255,0.35);
+  margin-top: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.login-field-wrap {
+  margin-bottom: 16px;
+}
+.login-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--gold);
+  margin-bottom: 8px;
+  display: block;
+}
+.login-input {
+  width: 100%;
+  padding: 13px 16px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(200,151,74,0.2);
+  border-radius: 10px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  color: #fff;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+  outline: none;
+}
+.login-input::placeholder { color: rgba(255,255,255,0.25); }
+.login-input:focus {
+  border-color: var(--gold);
+  background: rgba(200,151,74,0.07);
+  box-shadow: 0 0 0 3px rgba(200,151,74,0.12);
+}
+
+.login-btn {
+  width: 100%;
+  padding: 14px;
+  margin-top: 8px;
+  background: linear-gradient(135deg, #c8974a 0%, #e4b96e 50%, #c8974a 100%);
+  background-size: 200% 100%;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.34,1.56,0.64,1);
+  box-shadow: 0 4px 20px rgba(200,151,74,0.3);
+}
+.login-btn:hover {
+  background-position: 100% 0;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(200,151,74,0.45);
+}
+.login-btn:active { transform: translateY(0); }
+
+.login-error {
+  background: rgba(224,82,82,0.12);
+  border: 1px solid rgba(224,82,82,0.3);
+  color: #ff9090;
+  font-size: 12.5px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin-bottom: 14px;
+  text-align: center;
+  display: none;
+  animation: shake 0.35s ease;
+}
+.login-error.show { display: block; }
+
+@keyframes shake {
+  0%,100% { transform: translateX(0); }
+  20%      { transform: translateX(-6px); }
+  40%      { transform: translateX(6px); }
+  60%      { transform: translateX(-4px); }
+  80%      { transform: translateX(4px); }
+}
+
+.login-footer-text {
+  text-align: center;
+  font-size: 11px;
+  color: rgba(255,255,255,0.2);
+  margin-top: 24px;
+  letter-spacing: 0.04em;
+}
+
+/* hide main app until logged in */
+#app { display: none; }
+
+
 .toolbar {
   display: flex;
   justify-content: flex-end;
@@ -685,6 +854,39 @@ tbody tr:hover .del-btn { opacity: 1; }
 </head>
 <body>
 
+<!-- ══ LOGIN SCREEN ══ -->
+<div id="login-screen">
+  <div class="login-card">
+    <div class="login-logo">
+      <div class="login-diamond-row">
+        <div class="login-d-line"></div>
+        <div class="login-d-icon"></div>
+        <div class="login-d-line login-d-line-r"></div>
+      </div>
+      <div class="login-company">Abdullah Hussain Hazazy<br>for Trading</div>
+      <div class="login-company-ar">عبدالله حسين حزازي للتجارة</div>
+      <div class="login-subtitle">Quotation System · Sign In</div>
+    </div>
+
+    <div class="login-error" id="login-error">⚠ Incorrect username or password</div>
+
+    <div class="login-field-wrap">
+      <label class="login-label">Username</label>
+      <input class="login-input" id="login-user" type="text" placeholder="Enter username" autocomplete="username" />
+    </div>
+    <div class="login-field-wrap">
+      <label class="login-label">Password</label>
+      <input class="login-input" id="login-pass" type="password" placeholder="Enter password" autocomplete="current-password" />
+    </div>
+
+    <button class="login-btn" onclick="doLogin()">Sign In →</button>
+
+    <div class="login-footer-text">Tools &amp; Safety · Riyadh, Saudi Arabia</div>
+  </div>
+</div>
+
+<!-- ══ MAIN APP ══ -->
+<div id="app">
 <div class="page-wrapper">
 
   <!-- Toolbar -->
@@ -840,8 +1042,40 @@ tbody tr:hover .del-btn { opacity: 1; }
 
   </div>
 </div>
+</div> <!-- /#app -->
 
 <script>
+  // ── LOGIN ─────────────────────────────────────
+  function doLogin() {
+    const user = document.getElementById('login-user').value.trim();
+    const pass = document.getElementById('login-pass').value.trim();
+    const err  = document.getElementById('login-error');
+
+    if (user === 'bismi' && pass === 'bismi') {
+      err.classList.remove('show');
+      const screen = document.getElementById('login-screen');
+      screen.classList.add('hide');
+      setTimeout(() => {
+        screen.style.display = 'none';
+        document.getElementById('app').style.display = 'block';
+      }, 500);
+    } else {
+      err.classList.remove('show');
+      void err.offsetWidth; // restart animation
+      err.classList.add('show');
+      document.getElementById('login-pass').value = '';
+      document.getElementById('login-pass').focus();
+    }
+  }
+
+  // Allow pressing Enter to submit login
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' && document.getElementById('login-screen').style.display !== 'none') {
+      doLogin();
+    }
+  });
+
+  // ── QUOTATION ─────────────────────────────────
   const VAT_RATE = 0.15;
   let rowCount = 0;
 
