@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Professional Quotation — Abdullah Hussain Hazazy</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:        #0b1524;
+  --navy-mid:    #162035;
+  --navy-soft:   #1f2f48;
+  --gold:        #c8974a;
+  --gold-light:  #e4b96e;
+  --gold-pale:   #f7eed9;
+  --gold-dim:    rgba(200,151,74,0.15);
+  --smoke:       #f2ede6;
+  --parchment:   #faf7f2;
+  --ink:         #12213a;
+  --ink-mid:     #3a4f6e;
+  --ink-soft:    #6b82a0;
+  --border:      #ddd5c4;
+  --border-soft: rgba(200,151,74,0.2);
+  --white:       #ffffff;
+  --green:       #2e7d5e;
+  --radius:      14px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--smoke);
+  color: var(--ink);
+  min-height: 100vh;
+  padding: 36px 20px 60px;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(200,151,74,0.06), transparent),
+    url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c8974a' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.page-wrapper {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+/* ──────────── TOOLBAR ──────────── */
+.toolbar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-bottom: 22px;
+  flex-wrap: wrap;
+  animation: floatDown 0.5s ease both;
+}
+
+@keyframes floatDown {
+  from { opacity: 0; transform: translateY(-12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.btn {
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 10px 22px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  letter-spacing: 0.04em;
+  transition: all 0.22s cubic-bezier(0.34,1.56,0.64,1);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.12);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.btn:hover::after { opacity: 1; }
+
+.btn-gold {
+  background: linear-gradient(135deg, #c8974a 0%, #e4b96e 50%, #c8974a 100%);
+  background-size: 200% 100%;
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(200,151,74,0.35);
+}
+.btn-gold:hover {
+  background-position: 100% 0;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(200,151,74,0.45);
+}
+
+.btn-ghost {
+  background: rgba(255,255,255,0.7);
+  color: var(--ink-mid);
+  border: 1.5px solid var(--border);
+  backdrop-filter: blur(8px);
+}
+.btn-ghost:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(200,151,74,0.15);
+}
+
+/* ──────────── CARD ──────────── */
+.card {
+  background: var(--white);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow:
+    0 0 0 1px rgba(200,151,74,0.15),
+    0 4px 8px rgba(11,21,36,0.04),
+    0 24px 60px rgba(11,21,36,0.10);
+  animation: riseUp 0.65s cubic-bezier(0.22,1,0.36,1) both;
+  animation-delay: 0.1s;
+}
+
+@keyframes riseUp {
+  from { opacity: 0; transform: translateY(28px) scale(0.99); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ──────────── HEADER ──────────── */
+.doc-header {
+  background: var(--navy);
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decorative geometric lines */
+.doc-header::before {
+  content: '';
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 320px; height: 320px;
+  border-radius: 50%;
+  border: 60px solid rgba(200,151,74,0.06);
+  pointer-events: none;
+}
+.doc-header::after {
+  content: '';
+  position: absolute;
+  bottom: -40px; left: 40%;
+  width: 200px; height: 200px;
+  border-radius: 50%;
+  border: 40px solid rgba(200,151,74,0.04);
+  pointer-events: none;
+}
+
+/* Gold top stripe */
+.header-stripe {
+  height: 4px;
+  background: linear-gradient(90deg, transparent 0%, var(--gold) 20%, var(--gold-light) 50%, var(--gold) 80%, transparent 100%);
+}
+
+.header-inner {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 24px;
+  padding: 44px 50px 40px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.co-left { display: flex; flex-direction: column; gap: 10px; }
+.co-right { display: flex; flex-direction: column; gap: 10px; text-align: right; direction: rtl; }
+
+.co-name-en {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--gold-light);
+  letter-spacing: 0.01em;
+  line-height: 1.15;
+}
+.co-sub-en {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14px;
+  font-style: italic;
+  color: rgba(200,151,74,0.65);
+  margin-top: -4px;
+}
+.co-detail {
+  font-size: 12.5px;
+  line-height: 1.9;
+  color: rgba(255,255,255,0.55);
+  font-weight: 300;
+  margin-top: 4px;
+}
+.co-detail span { display: block; }
+
+.co-name-ar {
+  font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--gold-light);
+  line-height: 1.4;
+}
+.co-sub-ar {
+  font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+  font-size: 13px;
+  color: rgba(200,151,74,0.65);
+  line-height: 1.5;
+}
+.co-detail-ar {
+  font-size: 12.5px;
+  line-height: 1.9;
+  color: rgba(255,255,255,0.55);
+  font-weight: 300;
+  font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+  margin-top: 4px;
+}
+.co-detail-ar span { display: block; }
+
+/* Center title */
+.title-center { text-align: center; }
+
+.diamond-deco {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.diamond-line {
+  width: 48px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold));
+}
+.diamond-line.right { background: linear-gradient(90deg, var(--gold), transparent); }
+.diamond-icon {
+  width: 8px; height: 8px;
+  background: var(--gold);
+  transform: rotate(45deg);
+  box-shadow: 0 0 8px rgba(200,151,74,0.6);
+}
+
+.doc-title-main {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 42px;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: 0.14em;
+  line-height: 1;
+}
+.doc-title-ar {
+  font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.6);
+  direction: rtl;
+  margin-top: 6px;
+  letter-spacing: 0.02em;
+}
+.validity-pill {
+  display: inline-block;
+  margin-top: 14px;
+  padding: 5px 16px;
+  background: var(--gold-dim);
+  border: 1px solid var(--border-soft);
+  color: var(--gold-light);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border-radius: 30px;
+}
+
+/* ──────────── META BAR ──────────── */
+.meta-bar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-bottom: 1px solid var(--border);
+  background: var(--parchment);
+}
+
+.meta-item {
+  padding: 18px 26px;
+  border-right: 1px solid var(--border);
+  position: relative;
+}
+.meta-item:last-child { border-right: none; }
+
+.meta-item::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transition: transform 0.25s;
+  transform-origin: left;
+}
+.meta-item:focus-within::before { transform: scaleX(1); }
+
+.meta-label {
+  font-size: 9.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--gold);
+  margin-bottom: 5px;
+}
+.meta-value {
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+  border: none;
+  background: transparent;
+  width: 100%;
+  padding: 2px 0;
+}
+.meta-value:focus { outline: none; }
+
+/* ──────────── CLIENT SECTION ──────────── */
+.client-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid var(--border);
+}
+.client-box {
+  padding: 28px 34px;
+  border-right: 1px solid var(--border);
+}
+.client-box:last-child { border-right: none; }
+
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 9.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--gold);
+  margin-bottom: 14px;
+}
+.section-label::before {
+  content: '';
+  display: inline-block;
+  width: 18px; height: 2px;
+  background: var(--gold);
+  border-radius: 2px;
+}
+
+.ef {
+  display: block;
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  color: var(--ink);
+  border: none;
+  background: transparent;
+  width: 100%;
+  padding: 4px 0;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s;
+  line-height: 1.55;
+}
+.ef:focus { outline: none; border-bottom-color: rgba(200,151,74,0.4); }
+.ef::placeholder { color: rgba(107,130,160,0.5); }
+.ef-lg { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+
+/* ──────────── TABLE ──────────── */
+.table-section { padding: 32px 32px 20px; }
+
+.table-scroll { overflow-x: auto; border-radius: 10px; border: 1px solid var(--border); }
+
+table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+
+thead tr { background: var(--navy-soft); }
+thead th {
+  padding: 14px 14px;
+  text-align: left;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.75);
+  white-space: nowrap;
+}
+thead th:last-child { text-align: right; }
+
+/* Gold accent on first col header */
+thead th:first-child {
+  color: var(--gold);
+  text-align: center;
+}
+
+tbody tr {
+  border-bottom: 1px solid var(--border);
+  transition: background 0.18s;
+  animation: slideIn 0.28s ease both;
+}
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-6px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+tbody tr:last-child { border-bottom: none; }
+tbody tr:hover { background: rgba(200,151,74,0.04); }
+
+tbody td { padding: 10px 14px; vertical-align: middle; }
+
+.ci {
+  font-family: 'Outfit', sans-serif;
+  font-size: 13.5px;
+  border: none;
+  background: transparent;
+  width: 100%;
+  color: var(--ink);
+  padding: 3px 4px;
+  border-radius: 4px;
+  transition: background 0.15s;
+}
+.ci:focus { outline: none; background: rgba(200,151,74,0.07); }
+.ci::placeholder { color: rgba(107,130,160,0.4); }
+.ci-r { text-align: right; }
+
+.sno {
+  text-align: center;
+  font-weight: 700;
+  font-size: 12px;
+  color: var(--gold);
+  width: 44px;
+}
+
+.amt-val { text-align: right; font-weight: 500; white-space: nowrap; min-width: 88px; color: var(--ink-mid); }
+.vat-val { text-align: right; font-weight: 500; white-space: nowrap; min-width: 88px; color: var(--ink-soft); }
+.tot-val { text-align: right; font-weight: 700; white-space: nowrap; min-width: 88px; color: var(--green); }
+
+.del-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #e05252;
+  font-size: 13px;
+  opacity: 0;
+  transition: opacity 0.18s, transform 0.18s;
+  padding: 4px 6px;
+  border-radius: 4px;
+}
+tbody tr:hover .del-btn { opacity: 1; }
+.del-btn:hover { transform: scale(1.2); background: rgba(224,82,82,0.08); }
+
+/* ADD ROW */
+.add-row-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 14px;
+  padding: 11px 20px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gold);
+  background: linear-gradient(135deg, rgba(200,151,74,0.06), rgba(200,151,74,0.10));
+  border: 1.5px dashed rgba(200,151,74,0.4);
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.22s;
+  letter-spacing: 0.03em;
+}
+.add-row-btn:hover {
+  background: rgba(200,151,74,0.13);
+  border-color: var(--gold);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(200,151,74,0.12);
+}
+
+/* ──────────── SUMMARY ──────────── */
+.summary-section {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 32px;
+  padding: 28px 32px 32px;
+  border-top: 1px solid var(--border);
+  background: var(--parchment);
+}
+
+.notes-label {
+  font-size: 9.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--gold);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.notes-label::before {
+  content: '';
+  display: inline-block;
+  width: 18px; height: 2px;
+  background: var(--gold);
+  border-radius: 2px;
+}
+
+.notes-area {
+  font-family: 'Outfit', sans-serif;
+  font-size: 13.5px;
+  color: var(--ink-mid);
+  resize: vertical;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px 16px;
+  width: 100%;
+  min-height: 110px;
+  background: var(--white);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  line-height: 1.65;
+}
+.notes-area:focus {
+  outline: none;
+  border-color: rgba(200,151,74,0.5);
+  box-shadow: 0 0 0 3px rgba(200,151,74,0.08);
+}
+
+/* Totals */
+.totals-wrap { display: flex; flex-direction: column; }
+
+.totals-label {
+  font-size: 9.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--gold);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.totals-label::before {
+  content: '';
+  display: inline-block;
+  width: 18px; height: 2px;
+  background: var(--gold);
+  border-radius: 2px;
+}
+
+.totals-box {
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  background: var(--white);
+  box-shadow: 0 2px 12px rgba(11,21,36,0.05);
+}
+
+.t-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 13px 20px;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+  transition: background 0.15s;
+}
+.t-row:last-child { border-bottom: none; }
+.t-row:hover { background: rgba(200,151,74,0.03); }
+
+.t-label { color: var(--ink-soft); font-weight: 400; }
+.t-value { font-weight: 600; color: var(--ink); }
+
+.vat-tag {
+  display: inline-block;
+  background: rgba(200,151,74,0.12);
+  color: var(--gold);
+  font-size: 9.5px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 20px;
+  margin-left: 6px;
+  letter-spacing: 0.06em;
+}
+
+.t-row.grand {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+  padding: 18px 20px;
+  position: relative;
+  overflow: hidden;
+}
+.t-row.grand::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.t-row.grand .t-label {
+  color: rgba(255,255,255,0.65);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.t-row.grand .t-value {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--gold-light);
+  letter-spacing: 0.02em;
+}
+
+/* ──────────── FOOTER ──────────── */
+.doc-footer {
+  padding: 22px 32px;
+  border-top: 1px solid var(--border);
+  background: var(--white);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 24px;
+  align-items: center;
+}
+
+.footer-terms {
+  font-size: 12px;
+  color: var(--ink-soft);
+  line-height: 1.7;
+}
+.footer-terms strong {
+  color: var(--ink-mid);
+  font-weight: 600;
+}
+
+.sig-block { text-align: center; }
+.sig-line-el {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+.sig-line-el span {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border));
+}
+.sig-line-el span.r {
+  background: linear-gradient(90deg, var(--border), transparent);
+}
+.sig-diamond {
+  width: 6px; height: 6px;
+  background: var(--gold);
+  transform: rotate(45deg);
+}
+.sig-text {
+  font-size: 11px;
+  color: var(--ink-soft);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+/* ──────────── PRINT ──────────── */
+@media print {
+  body { background: white; padding: 0; }
+  .toolbar, .add-row-btn, .del-btn { display: none !important; }
+  .card { box-shadow: none; }
+  .ci, .meta-value, .ef, .notes-area { background: transparent !important; }
+}
+
+@media (max-width: 780px) {
+  .header-inner { grid-template-columns: 1fr; gap: 20px; }
+  .co-right { direction: ltr; text-align: left; }
+  .title-center { order: -1; }
+  .meta-bar { grid-template-columns: repeat(2,1fr); }
+  .client-section { grid-template-columns: 1fr; }
+  .client-box { border-right: none; border-bottom: 1px solid var(--border); }
+  .summary-section { grid-template-columns: 1fr; }
+  .doc-footer { grid-template-columns: 1fr; text-align: center; }
+  .sig-block { display: none; }
+}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+
+<div class="page-wrapper">
+
+  <!-- Toolbar -->
+  <div class="toolbar">
+    <button class="btn btn-ghost" onclick="addRow()">＋ Add Item</button>
+    <button class="btn btn-ghost" onclick="window.print()">🖨 Print</button>
+    <button class="btn btn-ghost" onclick="downloadPDF()">⬇ Download PDF</button>
+    <button class="btn btn-gold" onclick="alert('Quotation saved!')">💾 Save Quotation</button>
+  </div>
+
+  <div class="card">
+
+    <!-- Header -->
+    <div class="doc-header">
+      <div class="header-stripe"></div>
+      <div class="header-inner">
+
+        <!-- English Company Info -->
+        <div class="co-left">
+          <div class="co-name-en">Abdullah Hussain Hazazy<br>for Trading</div>
+          <div class="co-sub-en">Tools &amp; Safety</div>
+          <div class="co-detail">
+            <span>VAT No: 300374574594500003</span>
+            <span>Alkharj Road, Riyadh</span>
+            <span>Saudi Arabia</span>
+          </div>
+        </div>
+
+        <!-- Center Title -->
+        <div class="title-center">
+          <div class="diamond-deco">
+            <div class="diamond-line"></div>
+            <div class="diamond-icon"></div>
+            <div class="diamond-line right"></div>
+          </div>
+          <div class="doc-title-main">QUOTATION</div>
+          <div class="doc-title-ar">عرض سعر</div>
+        </div>
+
+        <!-- Arabic Company Info -->
+        <div class="co-right">
+          <div class="co-name-ar">عبدالله حسين حزازي للتجارة</div>
+          <div class="co-sub-ar">الأدوات والسلامة</div>
+          <div class="co-detail-ar">
+            <span>الرقم الضريبي: 300374574594500003</span>
+            <span>طريق الخرج، الرياض</span>
+            <span>المملكة العربية السعودية</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Meta Bar -->
+    <div class="meta-bar">
+      <div class="meta-item">
+        <div class="meta-label">Quotation No.</div>
+        <input class="meta-value" value="QT-2025-0001" />
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Issue Date</div>
+        <input class="meta-value" type="date" id="issue-date" />
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Valid Until</div>
+        <input class="meta-value" type="date" id="valid-date" />
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Currency</div>
+        <input class="meta-value" id="currency-input" value="SAR" style="max-width:80px" />
+      </div>
+    </div>
+
+    <!-- Client Info -->
+    <div class="client-section">
+      <div class="client-box">
+        <div class="section-label">Bill To</div>
+        <input class="ef ef-lg" placeholder="Client / Company Name" />
+        <input class="ef" placeholder="Address Line 1" />
+        <input class="ef" placeholder="City, Country" />
+        <input class="ef" placeholder="Phone / Email" />
+      </div>
+      <div class="client-box">
+        <div class="section-label">Project / Reference</div>
+        <input class="ef ef-lg" placeholder="Project Name" />
+        <input class="ef" placeholder="Reference Number" />
+        <input class="ef" placeholder="Site / Location" />
+        <input class="ef" placeholder="Contact Person" />
+      </div>
+    </div>
+
+    <!-- Table -->
+    <div class="table-section">
+      <div class="table-scroll">
+        <table id="quote-table">
+          <thead>
+            <tr>
+              <th style="width:44px;">No.</th>
+              <th style="min-width:110px;">Product No.</th>
+              <th style="min-width:220px;">Description</th>
+              <th style="min-width:68px;">Unit</th>
+              <th style="min-width:78px;">Qty</th>
+              <th style="min-width:100px;">Unit Rate</th>
+              <th style="min-width:100px; text-align:right;">Amount</th>
+              <th style="min-width:100px; text-align:right;">VAT (15%)</th>
+              <th style="min-width:110px; text-align:right;">Total</th>
+              <th style="width:32px;"></th>
+            </tr>
+          </thead>
+          <tbody id="table-body"></tbody>
+        </table>
+      </div>
+      <button class="add-row-btn" onclick="addRow()">＋ Add New Item</button>
+    </div>
+
+    <!-- Summary -->
+    <div class="summary-section">
+      <div>
+        <div class="notes-label">Notes &amp; Terms</div>
+        <textarea class="notes-area" placeholder="Add payment terms, delivery notes, or any special conditions here..."></textarea>
+      </div>
+      <div class="totals-wrap">
+        <div class="totals-label">Summary</div>
+        <div class="totals-box">
+          <div class="t-row">
+            <span class="t-label">Subtotal</span>
+            <span class="t-value" id="subtotal">0.00</span>
+          </div>
+          <div class="t-row">
+            <span class="t-label">VAT <span class="vat-tag">15%</span></span>
+            <span class="t-value" id="vat-total">0.00</span>
+          </div>
+          <div class="t-row grand">
+            <span class="t-label">Grand Total</span>
+            <span class="t-value" id="grand-total">0.00</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="doc-footer">
+      <div class="footer-terms"></div>
+      <div class="sig-block">
+        <div class="sig-line-el">
+          <span></span>
+          <div class="sig-diamond"></div>
+          <span class="r"></span>
+        </div>
+        <div class="sig-text">Authorized Signature</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  const VAT_RATE = 0.15;
+  let rowCount = 0;
+
+  // Dates
+  const today = new Date();
+  const valid = new Date();
+  valid.setDate(today.getDate() + 30);
+  document.getElementById('issue-date').value = today.toISOString().split('T')[0];
+  document.getElementById('valid-date').value = valid.toISOString().split('T')[0];
+
+  function getCurrency() {
+    return document.getElementById('currency-input').value.trim() || 'SAR';
+  }
+
+  function fmt(n) {
+    return parseFloat(n || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+
+  function addRow() {
+    rowCount++;
+    const tbody = document.getElementById('table-body');
+    const tr = document.createElement('tr');
+    tr.id = `row-${rowCount}`;
+    tr.innerHTML = `
+      <td class="sno">${rowCount}</td>
+      <td><input class="ci" placeholder="PRD-001" /></td>
+      <td><input class="ci" placeholder="Product description..." style="min-width:200px" /></td>
+      <td><input class="ci" placeholder="Pcs" style="width:62px" /></td>
+      <td><input class="ci ci-r qty" placeholder="0" type="number" min="0" step="any" style="width:72px" oninput="calcRow(this)" /></td>
+      <td><input class="ci ci-r rate" placeholder="0.00" type="number" min="0" step="any" style="width:90px" oninput="calcRow(this)" /></td>
+      <td class="amt-val" data-amount="0"><span class="row-amount">—</span></td>
+      <td class="vat-val" data-vat="0"><span class="row-vat">—</span></td>
+      <td class="tot-val" data-total="0"><span class="row-total">—</span></td>
+      <td><button class="del-btn" onclick="deleteRow('row-${rowCount}')" title="Remove row">✕</button></td>
+    `;
+    tbody.appendChild(tr);
+    updateSummary();
+  }
+
+  function calcRow(input) {
+    const row = input.closest('tr');
+    const qty  = parseFloat(row.querySelector('.qty').value)  || 0;
+    const rate = parseFloat(row.querySelector('.rate').value) || 0;
+    const amount = qty * rate;
+    const vat    = amount * VAT_RATE;
+    const total  = amount + vat;
+
+    const showAmt = amount > 0 ? fmt(amount) : '—';
+    const showVat = vat > 0    ? fmt(vat)    : '—';
+    const showTot = total > 0  ? fmt(total)  : '—';
+
+    row.querySelector('.row-amount').textContent = showAmt;
+    row.querySelector('.row-vat').textContent    = showVat;
+    row.querySelector('.row-total').textContent  = showTot;
+    row.querySelector('.amt-val').dataset.amount = amount;
+    row.querySelector('.vat-val').dataset.vat    = vat;
+    row.querySelector('.tot-val').dataset.total  = total;
+
+    updateSummary();
+  }
+
+  function deleteRow(id) {
+    const row = document.getElementById(id);
+    if (!row) return;
+    row.style.transition = 'opacity 0.18s, transform 0.18s';
+    row.style.opacity = '0';
+    row.style.transform = 'translateX(10px)';
+    setTimeout(() => { row.remove(); renumber(); updateSummary(); }, 200);
+  }
+
+  function renumber() {
+    document.querySelectorAll('#table-body tr').forEach((r, i) => {
+      r.querySelector('.sno').textContent = i + 1;
+    });
+  }
+
+  function updateSummary() {
+    let sub = 0, vatSum = 0;
+    document.querySelectorAll('#table-body tr').forEach(r => {
+      sub    += parseFloat(r.querySelector('.amt-val')?.dataset.amount || 0);
+      vatSum += parseFloat(r.querySelector('.vat-val')?.dataset.vat || 0);
+    });
+    const grand = sub + vatSum;
+    const cur = getCurrency();
+    const f = v => `${cur} ${fmt(v)}`;
+    document.getElementById('subtotal').textContent    = f(sub);
+    document.getElementById('vat-total').textContent   = f(vatSum);
+    document.getElementById('grand-total').textContent = f(grand);
+  }
+
+  document.getElementById('currency-input').addEventListener('input', updateSummary);
+
+  function downloadPDF() {
+    const toolbar = document.querySelector('.toolbar');
+    const addBtn  = document.querySelector('.add-row-btn');
+    const delBtns = document.querySelectorAll('.del-btn');
+
+    // Hide UI-only elements
+    toolbar.style.display  = 'none';
+    addBtn.style.display   = 'none';
+    delBtns.forEach(b => b.style.display = 'none');
+
+    const qtNo = document.querySelector('.meta-value')?.value || 'quotation';
+    const filename = `Quotation-${qtNo}.pdf`;
+
+    html2pdf()
+      .set({
+        margin:      [8, 8, 8, 8],
+        filename:    filename,
+        image:       { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2, useCORS: true, logging: false },
+        jsPDF:       { unit: 'mm', format: 'a4', orientation: 'landscape' },
+        pagebreak:   { mode: ['avoid-all'] }
+      })
+      .from(document.querySelector('.card'))
+      .save()
+      .then(() => {
+        toolbar.style.display  = '';
+        addBtn.style.display   = '';
+        delBtns.forEach(b => b.style.display = '');
+      });
+  }
+
+  addRow(); addRow(); addRow();
+</script>
+</body>
+</html>
