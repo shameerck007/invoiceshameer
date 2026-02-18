@@ -7,6 +7,10 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#0b1524">
+<link rel="manifest" id="pwa-manifest">
+<meta name="apple-mobile-web-app-title" content="Quotation">
+<meta name="application-name" content="Quotation">
+<link rel="apple-touch-icon" id="apple-touch-icon-pwa">
 <title>Professional Quotation — Abdullah Hussain Hazazy</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
@@ -336,7 +340,6 @@ tbody tr:hover .del-btn { opacity:1; }
   .section-label { font-size:7px !important; margin-bottom:4px !important; }
   .table-section { padding:8px 10px 6px !important; }
   .table-scroll { overflow:visible !important; }
-  /* On print: hide the card view, show the table */
   .mobile-items-list { display:none !important; }
   #quote-table { display:table !important; }
   table { table-layout:fixed !important; width:100% !important; font-size:8.5pt !important; }
@@ -358,6 +361,7 @@ tbody tr:hover .del-btn { opacity:1; }
   .sig-svg { width:130px !important; height:56px !important; }
   .sq-stamp { width:110px !important; height:110px !important; }
   .words-bar { padding:5px 14px !important; }
+  #install-banner, #ios-hint { display:none !important; }
 }
 
 /* ════════════════════════════════════════
@@ -371,18 +375,14 @@ tbody tr:hover .del-btn { opacity:1; }
 }
 
 /* ════════════════════════════════════════
-   MOBILE  ≤ 640px
+   MOBILE  <= 640px
 ════════════════════════════════════════ */
 @media (max-width:640px) {
-  /* Prevent input zoom on iOS */
   input, textarea, select { font-size:16px !important; }
-
   body {
     padding: 0 0 calc(80px + env(safe-area-inset-bottom, 0px));
     background-attachment: fixed;
   }
-
-  /* ── Fixed bottom toolbar ── */
   .toolbar {
     position: fixed;
     bottom: 0;
@@ -411,14 +411,8 @@ tbody tr:hover .del-btn { opacity:1; }
   }
   .btn-icon { font-size:18px; }
   .btn-label { font-size:10px; letter-spacing:.02em; }
-
-  /* ── Page wrapper ── */
   #app .page-wrapper { padding: 0; }
-
-  /* ── Card ── */
   .card { border-radius: 0; box-shadow: none; border: none; }
-
-  /* ── Header ── */
   .header-inner {
     grid-template-columns: 1fr;
     padding: 16px 18px 14px;
@@ -434,8 +428,6 @@ tbody tr:hover .del-btn { opacity:1; }
   .co-name-ar { font-size: 13px; }
   .co-sub-en, .co-sub-ar { font-size: 10px; }
   .co-detail, .co-detail-ar { font-size: 9px; }
-
-  /* ── Meta bar: 2×2 grid ── */
   .meta-bar { grid-template-columns: 1fr 1fr; }
   .meta-item { padding: 14px 14px; min-height: 60px; }
   .meta-item:nth-child(2) { border-right: none; }
@@ -443,16 +435,12 @@ tbody tr:hover .del-btn { opacity:1; }
   .meta-item:nth-child(4) { border-right: none; border-top: 1px solid var(--border); }
   .meta-label { font-size: 9px; margin-bottom: 4px; }
   .meta-value { font-size: 14px !important; font-weight: 500; padding: 0; }
-
-  /* ── Client section ── */
   .client-section { grid-template-columns: 1fr; }
   .client-box { border-right: none; border-bottom: 1px solid var(--border); padding: 14px 16px; }
   .client-box:last-child { border-bottom: none; }
   .section-label { font-size: 9px; margin-bottom: 8px; }
   .ef { font-size: 16px !important; padding: 6px 0; line-height: 1.5; }
   .ef-lg { font-size: 17px !important; font-weight: 700; }
-
-  /* ── Table section: hide standard table, show card list ── */
   .table-section { padding: 0; }
   .table-scroll { border: none; border-radius: 0; overflow: visible; }
   #quote-table { display: none; }
@@ -468,8 +456,6 @@ tbody tr:hover .del-btn { opacity:1; }
   }
   .add-row-btn:hover { transform: none; }
   .add-row-btn:active { background: rgba(200,151,74,0.15); }
-
-  /* ── Mobile item cards ── */
   .mobile-items-list { display: block; }
   .mobile-item-card {
     background: var(--white);
@@ -515,7 +501,6 @@ tbody tr:hover .del-btn { opacity:1; }
     -webkit-appearance: none;
   }
   .mic-del:active { background: rgba(224,82,82,0.25); transform: scale(.9); }
-
   .mic-desc {
     width: 100%; font-size: 16px !important;
     border: none; background: var(--parchment);
@@ -525,7 +510,6 @@ tbody tr:hover .del-btn { opacity:1; }
   }
   .mic-desc::placeholder { color: rgba(107,130,160,0.4); }
   .mic-desc:focus { outline: none; background: rgba(200,151,74,0.07); }
-
   .mic-grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -545,7 +529,6 @@ tbody tr:hover .del-btn { opacity:1; }
     width: 100%;
   }
   .mic-finput:focus { outline: none; border-color: var(--gold); background: rgba(200,151,74,0.05); }
-
   .mic-totals {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -559,8 +542,6 @@ tbody tr:hover .del-btn { opacity:1; }
   .mic-total-label { font-size: 8.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-soft); }
   .mic-total-val { font-size: 13px; font-weight: 600; color: var(--ink); }
   .mic-total-item.grand .mic-total-val { color: var(--green); font-size: 15px; font-weight: 700; }
-
-  /* Section divider label */
   .mobile-section-header {
     display: flex; align-items: center; gap: 10px;
     padding: 12px 16px 8px;
@@ -574,15 +555,12 @@ tbody tr:hover .del-btn { opacity:1; }
     flex: 1; height: 1px;
     background: linear-gradient(90deg, rgba(200,151,74,0.4), transparent);
   }
-
-  /* ── Summary ── */
   .summary-section {
     grid-template-columns: 1fr;
     padding: 16px 16px 20px;
     gap: 20px;
     order: 0;
   }
-  /* Reorder: totals first, then notes, then signature */
   .totals-wrap { order: 0; }
   .notes-area { font-size: 16px !important; min-height: 80px; }
   .notes-label, .totals-label { font-size: 9px; margin-bottom: 8px; }
@@ -590,8 +568,6 @@ tbody tr:hover .del-btn { opacity:1; }
   .grand-num { font-size: 28px; }
   .grand-label { font-size: 9px; }
   .vat-tag { font-size: 9px; padding: 2px 8px; }
-
-  /* Signature: center-aligned row */
   .stamp-wrap {
     flex-direction: row;
     align-items: center;
@@ -602,14 +578,11 @@ tbody tr:hover .del-btn { opacity:1; }
   }
   .sig-svg { width: 140px; height: 50px; }
   .sq-stamp { width: 110px; height: 110px; }
-
-  /* ── Amount in words ── */
   .words-bar { padding: 10px 16px; flex-direction: column; gap: 4px; }
   .words-bar-label { font-size: 9px; }
   .words-bar-value { font-size: 13px; }
 }
 
-/* Very small phones */
 @media (max-width:380px) {
   .mic-grid { grid-template-columns: 1fr 1fr; }
   .mic-grid .mic-field:last-child { grid-column: span 2; }
@@ -617,7 +590,82 @@ tbody tr:hover .del-btn { opacity:1; }
   .toolbar .btn { min-height: 44px; }
   .toolbar .btn-icon { font-size: 20px; }
 }
-</style>
+</style><script>
+/* ══ PWA Setup ══ */
+(function(){
+  var i192="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAADZ0lEQVR42u3dwW3jUBBEQd51dgaORgk6JWclQwnoIMif/PNKQCfQ00XCwIJ7HJv8fn/uD9knh59xCyRGLzAYvaQxOKokITiiJCE4miQhOJJkIdy+vh8iq2L8AoHhi5wEQfGSRaBwySJQtGQRKFiyCBQraQRKlSwAhUoWgSIli0CBkkagPMkCUJykEShNsgAUJmkEypIsAEVJGoGSJAtAQZJGoBwBQKQIQDGSRqAUAUCkCEAhkkagDAFAPpp3v3upOwASQ4cCAIMHAgCjhwEAo4cBAMMHAQDDB2EtAMOf/18KGfsLBMbficEDkBw+BAAYPwhtAEYPQRaAsUOQBWDkIGQBGDYESQDGDEEWgBFDkAVgvBBkARgtBAAIBEUAhgpBFoCBApAFYJwQZAFMGw0EAGw/mAJwAIx/+SAAAOByY/BdIgCSA9DDLASH8e97cH2EADj29boBYPiRvR0BcFwIRiMAYNhRdTUMgIPqDACH1FsRgCPqDwDH0yEAjqfHGABH0yUADqZPABxMpzEADqVXABxqy24BcCQAAHAkCABwHAAAcBwAAHCcFAIAHMZbAAAAAAAAAAAAcBR/BwDgIAAA4CD6BsBB9A2Ag+gbAAfRNwAOom8AHETfADiIvgEAQN8AAKBvAADQNwAQAAAAAAD459AAeNgAAAAAAEDgQQMAAMu+oje5cwAAAAACAAAAAAAAAAAAgMRRAQDgsgC8BQAAwFsAAAAgACAKwFsAAAAcCAAAHAmAKAAIAADAsQAoA4AAAAAcDYAyAAgAAMDxACgDOPvYOgEgf2xdAODwJx90p+EDMHwEhg+Ap+A/Hnnn0QMQfyLWRw8ABAIABAIAAAAAAAEAAEAAAAAQAAAABAAAAAEAAEAAAAAQGCkAIBg/ABAYPwAQGD4AIBg/ABAYPgAgGD8AIBg+ACAYPgAgGD4AIBg9AGEM7gGAz7YLAFNB6HMRgOdPEZIdPwACgDIEABEARAAQAUAEABEARGYDgEDS4wdAAFCKlAFAIOnxAyAAKEfKACCQ9PgBkDwACCQ9fgAkDwACSY8fAMkDgEDS4wdA8gAgkPT4IZD8+CGQ/PgBkDwACCQ9fggkP34IJD9+CCQ/fggkP34QJD98CMT4IRDjB0EMHwQxfBDE8EEQw4dBjB4GMXpIjPuqvz+4PWihQl85KgAAAABJRU5ErkJggg==";
+  var i512="data:image/png;base64,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";
+  var i180="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAYAAAA9zQYyAAADE0lEQVR42u3d0W0iQRBF0f73NxkQDQk6JbLCcgYWGLv71kG6AfjV2dGuxI7X2vhz/7w9tF/LB1jgARbgEAtukAU2yMrDdiAlUDuKMrA/LteH9FvBLKhBFtgwq4bawMqgNqxSqI2qDGiDKoPakMqgNqBSqI2nDGjDKYPaYEqhNpYyoA2lFGojKQPaQEqhNo6AlnYEbRilUBtFQEtAS28GbRClUBtDQOvlNwXZEOhj8UIO9AjAcAOdhww30EnEcAOdhgz2D0CDfAO7hBpksIGGGWqgQQYbaJihBtov4JmLesEMNtAwQw00zFADDTPUs0ADCnUGNJhQZ0ADCXUGNIhQZ0ADCDTQGoN6wfx/CKAeDLp+dKiBzh4Z6DjoiceFOgp6+lGBBjp5TDsEQDuiPYCOH88mh4J2NKiBHvSPH6APAu1Y/tADPfS7C7YC2msbgHYcqIF2GLvNBu0o++4HtIN4IAANtA2Bhhno/UB7OnswAA20LaeBnvome6AdAGigHQBooI1vU6CBtivQQANteKCBNjzQQANtV6CBtivQQANteKCBNjzQQANtV6CBtivQQANteKCBNnwYtG/bAW1TX/CH2p5AA21PoL0RqbWv1xgADTTQQAPtrx1AAw010EDnUAN9KGhPaaCB9os2gQYaaKChBhrofQ8INNC5AwINNNRAA737EYEGGmqggd79kHYAGmqggT7hmDADnTwqyEAnDwwy0MlDgwx0+ujTAAPtSZYOaKiBBhpooMOgoQY6BxpqoHOgoQY6BxpqoHOgoQY6BxpqrxbOgYbaO7JX9QcDeeYL31f5h4P5CjTUIAMNNsxAgw0y0FCDDHQRNrxA+0+pQIMNMtBwQww04AADfShyu70R9PfHEMpgBlpAS0BLQEtAC2iDCGhpS9BQK4UZaAEtAS39EWiolcIMtICWdgYNtVKYgVYONNRKYQZaOdBQK4UZauUwA60caKiVwgy1cpihVg4z0MqBhlopzFArhxlq5TCDrRxkqJXEDLVymMFWDjLUSmIGWznIYCsJGW4lEQMOsA/wwD75+QJj4aPnHnofZgAAAABJRU5ErkJggg==";
+  var ico=document.getElementById('apple-touch-icon-pwa');
+  if(ico) ico.href=i180;
+  var m={
+    name:"Quotation – Hazazy",
+    short_name:"Quotation",
+    description:"Professional Quotation System – Abdullah Hussain Hazazy for Trading",
+    start_url:location.href,
+    display:"standalone",
+    orientation:"any",
+    background_color:"#0b1524",
+    theme_color:"#0b1524",
+    icons:[
+      {src:i192,sizes:"192x192",type:"image/png",purpose:"any maskable"},
+      {src:i512,sizes:"512x512",type:"image/png",purpose:"any maskable"}
+    ]
+  };
+  var blob=new Blob([JSON.stringify(m)],{type:'application/manifest+json'});
+  var mlink=document.getElementById('pwa-manifest');
+  if(mlink) mlink.href=URL.createObjectURL(blob);
+})();
+
+/* ── Service Worker ── */
+if('serviceWorker' in navigator){
+  window.addEventListener('load',function(){
+    var sw=[
+      "self.addEventListener('install',()=>self.skipWaiting());",
+      "self.addEventListener('activate',e=>e.waitUntil(clients.claim()));",
+      "self.addEventListener('fetch',e=>e.respondWith(fetch(e.request).catch(()=>caches.match(e.request))));"
+    ].join('');
+    var swUrl=URL.createObjectURL(new Blob([sw],{type:'application/javascript'}));
+    navigator.serviceWorker.register(swUrl)
+      .then(function(){ console.log('%c✓ Quotation PWA ready','color:#c8974a;font-weight:bold'); })
+      .catch(function(e){ console.warn('SW:',e); });
+  });
+}
+
+/* ── Android A2HS ── */
+var _dp=null;
+window.addEventListener('beforeinstallprompt',function(e){
+  e.preventDefault();
+  _dp=e;
+  setTimeout(function(){
+    var b=document.getElementById('install-banner');
+    if(b) b.style.display='flex';
+  },2500);
+});
+function installApp(){
+  if(!_dp) return;
+  _dp.prompt();
+  _dp.userChoice.then(function(){
+    _dp=null;
+    var b=document.getElementById('install-banner');
+    if(b) b.style.display='none';
+  });
+}
+
+/* ── iOS hint ── */
+(function(){
+  var isIOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
+  var isStandalone=window.navigator.standalone===true;
+  if(isIOS&&!isStandalone){
+    window._showIOSHint=function(){
+      setTimeout(function(){
+        var h=document.getElementById('ios-hint');
+        if(h) h.style.display='block';
+      },3000);
+    };
+  }
+})();
+</script>
 </head>
 <body>
 
@@ -632,9 +680,9 @@ tbody tr:hover .del-btn { opacity:1; }
       </div>
       <div class="login-company">Abdullah Hussain Hazazy<br>for Trading</div>
       <div class="login-company-ar">عبدالله حسين حزازي للتجارة</div>
-      <div class="login-subtitle">Quotation System · Sign In</div>
+      <div class="login-subtitle">Quotation System &middot; Sign In</div>
     </div>
-    <div class="login-error" id="login-error">⚠ Incorrect username or password</div>
+    <div class="login-error" id="login-error">&#9888; Incorrect username or password</div>
     <div class="login-field-wrap">
       <label class="login-label">Username</label>
       <input class="login-input" id="login-user" type="text" placeholder="Enter username" autocomplete="username" autocorrect="off" autocapitalize="none"/>
@@ -643,8 +691,8 @@ tbody tr:hover .del-btn { opacity:1; }
       <label class="login-label">Password</label>
       <input class="login-input" id="login-pass" type="password" placeholder="Enter password" autocomplete="current-password"/>
     </div>
-    <button class="login-btn" onclick="doLogin()">Sign In →</button>
-    <div class="login-footer-text">Tools &amp; Safety · Riyadh, Saudi Arabia</div>
+    <button class="login-btn" onclick="doLogin()">Sign In &rarr;</button>
+    <div class="login-footer-text">Tools &amp; Safety &middot; Riyadh, Saudi Arabia</div>
   </div>
 </div>
 
@@ -652,18 +700,17 @@ tbody tr:hover .del-btn { opacity:1; }
 <div id="app">
 <div class="page-wrapper">
 
-  <!-- Bottom toolbar (fixed on mobile, top-right on desktop) -->
   <div class="toolbar">
     <button class="btn btn-ghost" onclick="window.print()">
-      <span class="btn-icon">🖨</span>
+      <span class="btn-icon">&#128424;</span>
       <span class="btn-label">Print</span>
     </button>
     <button class="btn btn-gold" id="pdf-btn" onclick="downloadPDF()">
-      <span class="btn-icon">⬇</span>
+      <span class="btn-icon">&#8595;</span>
       <span class="btn-label">PDF</span>
     </button>
     <button class="btn btn-share" id="share-btn" onclick="toggleShare(event)">
-      <span class="btn-icon">↗</span>
+      <span class="btn-icon">&#8599;</span>
       <span class="btn-label">Share</span>
     </button>
   </div>
@@ -736,15 +783,12 @@ tbody tr:hover .del-btn { opacity:1; }
       </div>
     </div>
 
-    <!-- TABLE (desktop) + CARDS (mobile) -->
+    <!-- TABLE + CARDS -->
     <div class="table-section">
-      <!-- Section header visible on mobile -->
       <div class="mobile-section-header">
         <div class="mobile-section-title">Line Items</div>
         <div class="mobile-section-line"></div>
       </div>
-
-      <!-- Desktop table -->
       <div class="table-scroll">
         <table id="quote-table">
           <colgroup>
@@ -776,23 +820,16 @@ tbody tr:hover .del-btn { opacity:1; }
           <tbody id="table-body"></tbody>
         </table>
       </div>
-
-      <!-- Mobile card list -->
       <div class="mobile-items-list" id="mobile-items-list" style="display:none;"></div>
-
-      <button class="add-row-btn" onclick="addRow()">＋ Add New Item</button>
+      <button class="add-row-btn" onclick="addRow()">﹢ Add New Item</button>
     </div>
 
     <!-- SUMMARY -->
     <div class="summary-section">
-
-      <!-- Notes -->
       <div>
         <div class="notes-label">Notes &amp; Terms</div>
         <textarea class="notes-area" placeholder="Add payment terms, delivery notes, or any special conditions here..."></textarea>
       </div>
-
-      <!-- Signature / Stamp -->
       <div class="stamp-wrap">
         <svg viewBox="0 0 260 80" xmlns="http://www.w3.org/2000/svg" class="sig-svg" style="overflow:visible;">
           <defs><filter id="f1"><feGaussianBlur stdDeviation="0.4"/></filter></defs>
@@ -807,8 +844,6 @@ tbody tr:hover .del-btn { opacity:1; }
         <div class="sig-label-row"><span></span><div class="sig-label-diamond"></div><span class="r"></span></div>
         <div class="sig-auth-label">Authorized Signature</div>
       </div>
-
-      <!-- Totals -->
       <div class="totals-wrap">
         <div class="totals-label">Summary</div>
         <div class="totals-box">
@@ -840,7 +875,6 @@ tbody tr:hover .del-btn { opacity:1; }
   </div><!-- /card -->
 </div><!-- /page-wrapper -->
 </div><!-- /app -->
-
 <script>
 /* ── LOGIN ── */
 function doLogin(){
@@ -855,6 +889,7 @@ function doLogin(){
       s.style.display='none';
       document.getElementById('app').style.display='block';
       initMobileView();
+      if(window._showIOSHint) window._showIOSHint();
     }, 500);
   } else {
     e.classList.remove('show');
@@ -904,10 +939,8 @@ const rowData = {};
 function addRow(){
   rc++;
   const id = rc;
-
   rowData[id] = { prodNo:'', desc:'', unit:'', qty:'', rate:'' };
 
-  // ── Desktop table row ──
   const tr = document.createElement('tr');
   tr.id = `row-${id}`;
   tr.innerHTML = `
@@ -923,7 +956,6 @@ function addRow(){
     <td class="no-pdf"><button class="del-btn" onclick="deleteRow(${id})" title="Remove">✕</button></td>`;
   document.getElementById('table-body').appendChild(tr);
 
-  // ── Mobile card ──
   const card = document.createElement('div');
   card.className = 'mobile-item-card';
   card.id = `mcard-${id}`;
@@ -968,7 +1000,6 @@ function addRow(){
       </div>
     </div>`;
   document.getElementById('mobile-items-list').appendChild(card);
-
   updateSummary();
 }
 
@@ -988,7 +1019,6 @@ function calcRowById(id){
   const vat    = amount * VAT;
   const total  = amount + vat;
 
-  // Update desktop row
   const tr = document.getElementById(`row-${id}`);
   if(tr){
     tr.querySelector('.row-amount').textContent = amount > 0 ? fmt(amount) : '—';
@@ -999,7 +1029,6 @@ function calcRowById(id){
     tr.querySelector('.tot-val').dataset.total  = total;
   }
 
-  // Update mobile card
   const amtEl = document.getElementById(`mc-amt-${id}`);
   const vatEl = document.getElementById(`mc-vat-${id}`);
   const totEl = document.getElementById(`mc-tot-${id}`);
@@ -1011,14 +1040,12 @@ function calcRowById(id){
 }
 
 function deleteRow(id){
-  // Desktop row
   const tr = document.getElementById(`row-${id}`);
   if(tr){
     tr.style.transition='opacity .18s,transform .18s';
     tr.style.opacity='0'; tr.style.transform='translateX(10px)';
     setTimeout(()=>{ tr.remove(); renumber(); }, 200);
   }
-  // Mobile card
   const card = document.getElementById(`mcard-${id}`);
   if(card){
     card.style.transition='opacity .18s,transform .18s,max-height .25s';
@@ -1083,7 +1110,6 @@ function collectData(){
       tot:    tr.querySelector('.row-total')?.textContent  || '—',
     });
   });
-  // On mobile, supplement from rowData if desktop inputs are empty
   if(isMobile() && rows.every(r=>!r.prodNo && !r.desc)){
     Object.keys(rowData).forEach((id, i)=>{
       if(rows[i]){
@@ -1133,11 +1159,11 @@ function generatePDFBlob(){
   doc.setFont('helvetica','bold'); doc.setFontSize(18); doc.setTextColor(255,255,255);
   doc.text('QUOTATION', W/2, 15, {align:'center'});
   doc.setFontSize(8); doc.setTextColor(200,200,200);
-  doc.text('عرض سعر', W/2, 21, {align:'center'});
+  doc.text('\u0639\u0631\u0636 \u0633\u0639\u0631', W/2, 21, {align:'center'});
   doc.setFontSize(8.5); doc.setTextColor(228,185,110);
-  doc.text('عبدالله حسين حزازي للتجارة', W-M, 9, {align:'right'});
+  doc.text('\u0639\u0628\u062f\u0627\u0644\u0644\u0647 \u062d\u0633\u064a\u0646 \u062d\u0632\u0627\u0632\u064a \u0644\u0644\u062a\u062c\u0627\u0631\u0629', W-M, 9, {align:'right'});
   doc.setFontSize(6.5); doc.setTextColor(160,160,160);
-  doc.text('الرقم الضريبي: 300374574594500003 | طريق الخرج، الرياض', W-M, 18.5, {align:'right'});
+  doc.text('\u0627\u0644\u0631\u0642\u0645 \u0627\u0644\u0636\u0631\u064a\u0628\u064a: 300374574594500003 | \u0637\u0631\u064a\u0642 \u0627\u0644\u062e\u0631\u062c\u060c \u0627\u0644\u0631\u064a\u0627\u0636', W-M, 18.5, {align:'right'});
   y=32;
 
   doc.setFillColor(250,247,242); doc.rect(M,y,W-2*M,12,'F');
@@ -1252,7 +1278,7 @@ function downloadPDF(){
     setTimeout(()=>URL.revokeObjectURL(url),3000);
   } catch(e){ alert('PDF error: '+e.message); }
   btn.disabled = false;
-  btn.innerHTML = '<span class="btn-icon">⬇</span><span class="btn-label">PDF</span>';
+  btn.innerHTML = '<span class="btn-icon">&#8595;</span><span class="btn-label">PDF</span>';
 }
 
 /* ── SHARE MENU ── */
@@ -1295,7 +1321,6 @@ function toggleShare(e){
   var menuW=224;
   var left=rect.right-menuW;
   if(left<8) left=8;
-  // On mobile fixed toolbar: menu appears above
   var top;
   if(window.innerWidth<=640){
     top = (rect.top + window.scrollY - 8);
@@ -1367,5 +1392,27 @@ async function shareVia(type){
 /* ── INIT ── */
 addRow(); addRow(); addRow();
 </script>
+<!-- ═══ INSTALL BANNERS ═══ -->
+<div id="install-banner" style="display:none;position:fixed;bottom:calc(80px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);z-index:9000;background:linear-gradient(135deg,#0f1e38,#162035);border:1px solid rgba(200,151,74,0.45);border-radius:16px;padding:14px 16px;align-items:center;gap:12px;box-shadow:0 8px 40px rgba(0,0,0,0.5);max-width:360px;width:calc(100% - 32px);">
+  <div style="width:44px;height:44px;background:#0b1524;border:1.5px solid rgba(200,151,74,0.4);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:24px;">&#128196;</div>
+  <div style="flex:1;min-width:0;">
+    <div style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;color:#e4b96e;">Add to Home Screen</div>
+    <div style="font-family:'Outfit',sans-serif;font-size:11px;color:rgba(255,255,255,0.5);margin-top:2px;">Install <strong style="color:rgba(255,255,255,0.8)">Quotation</strong> as an app</div>
+  </div>
+  <button onclick="installApp()" style="-webkit-appearance:none;background:linear-gradient(135deg,#c8974a,#e4b96e);border:none;border-radius:10px;padding:9px 14px;font-family:'Outfit',sans-serif;font-size:12px;font-weight:700;color:#fff;cursor:pointer;white-space:nowrap;box-shadow:0 4px 12px rgba(200,151,74,0.35);touch-action:manipulation;">Install</button>
+  <button onclick="document.getElementById('install-banner').style.display='none'" style="-webkit-appearance:none;background:rgba(255,255,255,0.07);border:none;border-radius:8px;color:rgba(255,255,255,0.4);cursor:pointer;font-size:18px;padding:4px 8px;line-height:1;touch-action:manipulation;">&#x2715;</button>
+</div>
+<div id="ios-hint" style="display:none;position:fixed;bottom:calc(80px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);z-index:9000;background:linear-gradient(135deg,#0f1e38,#162035);border:1px solid rgba(200,151,74,0.45);border-radius:16px;padding:16px 18px;max-width:340px;width:calc(100% - 32px);box-shadow:0 8px 40px rgba(0,0,0,0.5);">
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+    <span style="font-size:24px;">&#128242;</span>
+    <div style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;color:#e4b96e;">Install on iPhone / iPad</div>
+    <button onclick="document.getElementById('ios-hint').style.display='none'" style="-webkit-appearance:none;background:none;border:none;color:rgba(255,255,255,0.4);cursor:pointer;font-size:18px;margin-left:auto;padding:0 4px;touch-action:manipulation;">&#x2715;</button>
+  </div>
+  <div style="font-family:'Outfit',sans-serif;font-size:12.5px;color:rgba(255,255,255,0.65);line-height:1.9;">
+    <span style="color:#e4b96e;font-weight:600;">1.</span> Tap the <strong style="color:#e4b96e;">Share &#x2B06;</strong> button in Safari<br>
+    <span style="color:#e4b96e;font-weight:600;">2.</span> Scroll down &amp; tap <strong style="color:#e4b96e;">"Add to Home Screen"</strong><br>
+    <span style="color:#e4b96e;font-weight:600;">3.</span> Tap <strong style="color:#e4b96e;">"Add"</strong> &#8212; the app appears on your home screen!
+  </div>
+</div>
 </body>
 </html>
