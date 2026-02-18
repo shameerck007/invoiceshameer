@@ -81,6 +81,27 @@ body {
 .btn-gold:disabled { opacity:.7; cursor:not-allowed; transform:none !important; }
 .btn-ghost { background:rgba(255,255,255,0.7); color:var(--ink-mid); border:1.5px solid var(--border); backdrop-filter:blur(8px); }
 .btn-ghost:hover { border-color:var(--gold); color:var(--gold); transform:translateY(-2px); box-shadow:0 4px 12px rgba(200,151,74,0.15); }
+/* ── SHARE BUTTON & DROPDOWN ── */
+.btn-share { background:linear-gradient(135deg,#1a8a5a 0%,#22b572 50%,#1a8a5a 100%); background-size:200% 100%; color:#fff; box-shadow:0 4px 16px rgba(26,138,90,0.35); }
+.btn-share:hover { background-position:100% 0; transform:translateY(-2px); box-shadow:0 8px 24px rgba(26,138,90,0.45); }
+/* Menu is appended to body — position:fixed avoids all stacking-context traps */
+#share-menu-global { display:none; position:absolute; background:#fff; border:1px solid #ddd5c4; border-radius:12px; box-shadow:0 16px 48px rgba(11,21,36,0.22),0 2px 8px rgba(11,21,36,0.10); min-width:220px; z-index:99999; overflow:hidden; }
+@keyframes menuPop { from{opacity:0;transform:translateY(-6px) scale(.97)} to{opacity:1;transform:translateY(0) scale(1)} }
+#share-menu-global.open { display:block; animation:menuPop .18s cubic-bezier(.34,1.56,.64,1) both; }
+.share-menu-header { padding:9px 14px 7px; font-size:8.5px; font-weight:700; text-transform:uppercase; letter-spacing:.12em; color:#c8974a; border-bottom:1px solid #ddd5c4; }
+.share-item { display:flex; align-items:center; gap:11px; padding:11px 16px; font-size:13px; font-weight:500; color:#12213a; cursor:pointer; transition:background .15s; border:none; background:none; width:100%; font-family:'Outfit',sans-serif; text-align:left; }
+.share-item:hover { background:rgba(200,151,74,0.08); color:#c8974a; }
+.share-item:hover .share-icon { transform:scale(1.15); }
+.share-icon { width:32px; height:32px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; transition:transform .2s; }
+.si-wa  { background:#dcf8c6; }
+.si-em  { background:#ddeeff; }
+.si-sms { background:#e8e0ff; }
+.si-copy{ background:#fff3e0; }
+.si-more{ background:#f0f0f0; }
+.share-item-label { display:flex; flex-direction:column; gap:1px; }
+.share-item-sub { font-size:10px; color:#6b82a0; font-weight:400; }
+.share-copied { font-size:11px; color:#2e7d5e; font-weight:600; display:none; padding:6px 16px 8px; text-align:center; border-top:1px solid #ddd5c4; }
+.share-copied.show { display:block; }
 .btn-spinner { width:14px; height:14px; border:2px solid rgba(255,255,255,0.35); border-top-color:#fff; border-radius:50%; animation:spin .7s linear infinite; flex-shrink:0; }
 @keyframes spin { to{transform:rotate(360deg)} }
 
@@ -415,6 +436,7 @@ tbody tr:hover .del-btn { opacity:1; }
   <div class="toolbar">
     <button class="btn btn-ghost" onclick="window.print()">🖨 <span class="btn-full">Print</span></button>
     <button class="btn btn-gold" id="pdf-btn" onclick="downloadPDF()">⬇ <span class="btn-full">Download PDF</span><span class="btn-short">PDF</span></button>
+    <button class="btn btn-share" id="share-btn" onclick="toggleShare(event)">↗ <span class="btn-full">Share</span></button>
   </div>
 
   <div class="card" id="quotation-card">
@@ -896,6 +918,130 @@ tbody tr:hover .del-btn { opacity:1; }
     btn.innerHTML = '⬇ <span class="btn-full">Download PDF</span><span class="btn-short">PDF</span>';
   }
 
+
+
+  // ── SHARE LOGIC ──────────────────────────────────────────────
+  // Attach menu directly to <body> so it escapes every stacking context
+  (function() {
+    var items = [
+      { fn:"whatsapp", icon:"💬", bg:"#dcf8c6", label:"WhatsApp",      sub:"Send as message"   },
+      { fn:"email",    icon:"✉️",  bg:"#ddeeff", label:"Email",         sub:"Open mail client"  },
+      { fn:"sms",      icon:"📱", bg:"#e8e0ff", label:"SMS / Messages", sub:"Send via text"     },
+      { fn:"copy",     icon:"📋", bg:"#fff3e0", label:"Copy Summary",   sub:"Copy to clipboard" }
+    ];
+    if (navigator.share) {
+      items.push({ fn:"native", icon:"⋯", bg:"#f0f0f0", label:"More options…", sub:"System share sheet" });
+    }
+    var html = '<div class="share-menu-header">Share Quotation via</div>';
+    items.forEach(function(it) {
+      html += '<button class="share-item" onclick="shareVia(\'' + it.fn + '\')">'
+            + '<span class="share-icon" style="background:' + it.bg + '">' + it.icon + '</span>'
+            + '<span class="share-item-label"><span>' + it.label + '</span>'
+            + '<span class="share-item-sub">' + it.sub + '</span></span>'
+            + '</button>';
+    });
+    html += '<div class="share-copied" id="share-copied">✓ Copied to clipboard!</div>';
+    var menu = document.createElement('div');
+    menu.id = 'share-menu-global';
+    menu.innerHTML = html;
+    document.body.appendChild(menu);
+  })();
+
+  document.addEventListener('click', function(e) {
+    var menu = document.getElementById('share-menu-global');
+    var btn  = document.getElementById('share-btn');
+    if (!menu || !btn) return;
+    if (!menu.contains(e.target) && !btn.contains(e.target)) {
+      menu.classList.remove('open');
+    }
+  });
+
+  function toggleShare(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    var menu = document.getElementById('share-menu-global');
+    var btn  = document.getElementById('share-btn');
+    if (!menu || !btn) return;
+    var rect   = btn.getBoundingClientRect();
+    var isOpen = menu.classList.contains('open');
+    var menuW  = 224;
+    var left   = rect.right - menuW;
+    if (left < 8) left = 8;
+    menu.style.top   = (rect.bottom + window.scrollY + 8) + 'px';
+    menu.style.left  = left + 'px';
+    menu.style.position = 'absolute';
+    menu.classList.remove('open');
+    if (!isOpen) {
+      requestAnimationFrame(function() {
+        requestAnimationFrame(function() {
+          menu.classList.add('open');
+        });
+      });
+    }
+  }
+  function closeShare() {
+    var m = document.getElementById('share-menu-global');
+    if (m) m.classList.remove('open');
+  }
+
+  function buildShareText() {
+    const qtNum   = document.getElementById('qt-number').value || 'Quotation';
+    const issDate = document.getElementById('issue-date').value || '';
+    const cur     = document.getElementById('currency-input').value || 'SAR';
+    const grand   = document.getElementById('grand-total').textContent;
+    const words   = document.getElementById('amount-words').textContent;
+    const client  = document.querySelector('.client-box input')?.value || '';
+
+    let rows = '';
+    document.querySelectorAll('#table-body tr').forEach((tr, i) => {
+      const inputs = tr.querySelectorAll('input');
+      const desc = inputs[1]?.value; const qty = inputs[3]?.value; const rate = inputs[4]?.value;
+      const tot  = tr.querySelector('.row-total')?.textContent;
+      if (desc || qty) rows += `  ${i+1}. ${desc || '—'} | Qty: ${qty||0} | Total: ${tot||'—'}
+`;
+    });
+
+    return `*QUOTATION — ${qtNum}*
+Date: ${issDate}
+Client: ${client}
+
+*Items:*
+${rows}
+*Grand Total: ${cur} ${grand}*
+${words}`;
+  }
+
+  function shareVia(type) {
+    const text = buildShareText();
+    const qtNum = document.getElementById('qt-number').value || 'Quotation';
+    const subject = encodeURIComponent(`Quotation ${qtNum}`);
+
+    if (type === 'whatsapp') {
+      window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank');
+    } else if (type === 'email') {
+      const body = encodeURIComponent(text.replace(/\*/g,''));
+      window.location.href = `mailto:?subject=${subject}&body=${body}`;
+    } else if (type === 'sms') {
+      window.location.href = 'sms:?body=' + encodeURIComponent(text.replace(/\*/g,''));
+    } else if (type === 'copy') {
+      navigator.clipboard.writeText(text.replace(/\*/g,'')).then(() => {
+        const el = document.getElementById('share-copied');
+        el.classList.add('show');
+        setTimeout(() => { el.classList.remove('show'); closeShare(); }, 2000);
+      }).catch(() => {
+        const ta = document.createElement('textarea');
+        ta.value = text.replace(/\*/g,''); document.body.appendChild(ta);
+        ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
+        const el = document.getElementById('share-copied');
+        el.classList.add('show');
+        setTimeout(() => { el.classList.remove('show'); closeShare(); }, 2000);
+      });
+      return;
+    } else if (type === 'native') {
+      navigator.share({ title: `Quotation ${qtNum}`, text: text.replace(/\*/g,'') }).catch(()=>{});
+    }
+    closeShare();
+  }
 
   addRow(); addRow(); addRow();
 </script>
